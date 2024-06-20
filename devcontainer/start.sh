@@ -1,37 +1,55 @@
 #!/usr/bin/env bash
 
-sudo apt-get update -qq
-sudo apt-get install -qqy vim ruby-dev curl fuse make
+## Install packages
+PACKAGES=""
+if ! command -v gem &>/dev/null; then
+    PACKAGES="ruby-dev"
+fi
 
+if ! command -v vim &>/dev/null; then
+    PACKAGES="${PACKAGES} vim"
+fi
+
+if ! command -v curl &>/dev/null; then
+    PACKAGES="${PACKAGES} curl"
+fi
+
+if ! command -v fuse &>/dev/null; then
+    PACKAGES="${PACKAGES} fuse"
+fi
+
+if ! command -v make &>/dev/null; then
+    PACKAGES="${PACKAGES} make"
+fi
+
+sudo apt-get update -qq
+sudo apt-get install -y "${PACKAGES}"
 sudo gem install colorls
 
-#if [ -f "${HOME}/.dotfiles/nvim.appimage" ]; then
-#    chmod u+x "${HOME}/.dotfiles/nvim.appimage"
-#    mv "${HOME}/.dotfiles/nvim.appimage" /usr/local/bin/nvim
-#fi
-
+## Prepare dotfiles dirs
+[[ ! -d "${HOME}/.config" ]] && mkdir -p "${HOME}/.config"
 [[ ! -d "${HOME}/.local/bin" ]] && mkdir -p "${HOME}/.local/bin"
-mv "${HOME}/.dotfiles/nvim" "${HOME}/.local/bin/nvim"
 
 [[ -f "${HOME}/.dotfiles/.zshrc" && ! -f "${HOME}/.dotfiles/.bashrc" ]] &&
     (sudo usermod --shell /usr/bin/zsh salesloft &&
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended)
 
-if [ -f "${HOME}/.dotfiles/.bashrc" ]; then
-    ln -sf "${HOME}/.dotfiles/aliases" "${HOME}/.bash_aliases"
-    ln -sf "${HOME}/.dotfiles/envs" "${HOME}/.bash_envs"
-    ln -sf "${HOME}/.dotfiles/.bashrc" "${HOME}/.bashrc"
-fi
-
-[[ ! -d "${HOME}/.config" ]] && mkdir -p "${HOME}/.config/nvim"
-ln -sf "${HOME}/.dotfiles/init.lua" "${HOME}/.config/nvim/init.lua"
+## Link configs
+ln -sf "${HOME}/.dotfiles/nvim" "${HOME}/.config/nvim"
 ln -sf "${HOME}/.dotfiles/colorls" "${HOME}/.config/colorls"
 ln -sf "${HOME}/.dotfiles/kitty" "${HOME}/.config/kitty"
 ln -sf "${HOME}/.dotfiles/dracula-pro.zsh-theme" "${HOME}/.oh-my-zsh/themes/dracula-pro.zsh-theme"
 ln -sf "${HOME}/.dotfiles/.p10k.zsh" "${HOME}/.p10k.zsh"
 
+## Determine and stage shell & RC file
+if [ -f "${HOME}/.dotfiles/.bashrc" ]; then
+    [[ -f "${HOME}/.dotfiles/aliases" ]] && ln -sf "${HOME}/.dotfiles/aliases" "${HOME}/.bash_aliases"
+    [[ -f "${HOME}/.dotfiles/envs" ]] && ln -sf "${HOME}/.dotfiles/envs" "${HOME}/.bash_envs"
+    ln -sf "${HOME}/.dotfiles/.bashrc" "${HOME}/.bashrc"
+fi
+
 if [ -f "${HOME}/.dotfiles/.zshrc" ]; then
-    ln -sf "${HOME}/.dotfiles/aliases" "${HOME}/.zsh_aliases"
-    ln -sf "${HOME}/.dotfiles/envs" "${HOME}/.zsh_envs"
+    [[ -f "${HOME}/.dotfiles/aliases" ]] && ln -sf "${HOME}/.dotfiles/aliases" "${HOME}/.zsh_aliases"
+    [[ -f "${HOME}/.dotfiles/envs" ]] && ln -sf "${HOME}/.dotfiles/envs" "${HOME}/.zsh_envs"
     ln -sf "${HOME}/.dotfiles/.zshrc" "${HOME}/.zshrc"
 fi
