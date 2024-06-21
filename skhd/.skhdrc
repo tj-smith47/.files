@@ -1,0 +1,2 @@
+cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -o allow_remote_control=yes --listen-on=unix:/tmp/mykitty --start-as=fullscreen -d ~
+# cmd + shift - 0x73 : pwd
