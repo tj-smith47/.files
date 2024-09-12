@@ -1,1 +1,1 @@
---start-as=fullscreen # -o allow_remote_control=yes -o listen-on=unix:/tmp/mykitty
+# --start-as=fullscreen # -o allow_remote_control=yes -o listen-on=unix:/tmp/mykitty

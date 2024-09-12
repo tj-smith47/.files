@@ -5,10 +5,12 @@ argocd
 atuin
 configstore
 devcontainer/envs
+ee/
 fish
 fush
 gcloud
 gh
+gup/
 github-copilot
 iterm2
 nvim.local
