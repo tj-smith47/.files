@@ -13,7 +13,7 @@ local scheme = wezterm.color.get_builtin_schemes()["Dracula (Official)"]
 local nf = wezterm.nerdfonts
 local icon_overrides = {
 	["elixir"] = { nf.custom_elixir, color = { fg = scheme.ansi[5] } },
-	["gpg-connect-agent"] = { name = "git", nf.cod_github, color = { fg = scheme.ansi[1] } },
+	["gpg-connect-agent"] = { nf.cod_github, color = { fg = scheme.ansi[1] } },
 	["git"] = { nf.cod_github, color = { fg = scheme.ansi[1] } },
 	["python"] = { nf.dev_python, color = { fg = scheme.ansi[4] } },
 	["zsh"] = { nf.oct_terminal, color = { fg = scheme.ansi[7] } },
