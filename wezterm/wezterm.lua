@@ -24,7 +24,11 @@ tabline.setup({
 	options = {
 		icons_enabled = true,
 		theme = "Dracula (Official)",
-		color_overrides = {},
+		color_overrides = {
+			normal_mode = {
+				b = { fg = scheme.ansi[3] },
+			},
+		},
 		section_separators = {
 			left = nf.pl_left_hard_divider,
 			right = nf.pl_right_hard_divider,
@@ -40,7 +44,17 @@ tabline.setup({
 	},
 	sections = {
 		tabline_a = { "mode" },
-		tabline_b = { "workspace" },
+		tabline_b = {
+			{
+				"workspace",
+				icon = {
+					wezterm.nerdfonts.dev_apple,
+					color = {
+						fg = scheme.ansi[6],
+					},
+				},
+			},
+		},
 		tabline_c = { " " },
 		tab_active = {
 			"tab_index",
