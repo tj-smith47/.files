@@ -127,7 +127,7 @@ return {
 	font = wezterm.font_with_fallback({
 		{
 			family = "FiraCode Nerd Font Mono",
-			weight = "DemiBold",
+			weight = "Bold",
 		},
 		{
 			family = "Symbols Nerd Font Mono",
