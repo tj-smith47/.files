@@ -16,5 +16,5 @@
 # Use Terraform for .tf.template files
 --map-syntax tf.template:Terraform
 
-# Use Terraform for .tf.template files
+# Consider Dockerfiles with scoped endings as Dockerfiles
 --map-syntax Dockerfile.*:Dockerfile

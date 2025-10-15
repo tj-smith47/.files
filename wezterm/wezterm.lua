@@ -57,7 +57,7 @@ tabline.setup({
 		},
 		tabline_c = { " " },
 		tab_active = {
-			"tab_index",
+			"index",
 			{
 				"process",
 				padding = {
@@ -85,7 +85,7 @@ tabline.setup({
 		},
 		tab_inactive = {
 			{
-				"tab_index",
+				"index",
 				padding = {
 					left = 0,
 					right = 1,
